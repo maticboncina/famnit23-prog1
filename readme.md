@@ -2,10 +2,12 @@
   <img src="famnit.png" style="padding: 32px" />
 </p>
 
-# UP FAMNIT - Programming 1 - 2023/2024
+# UP FAMNIT - Programming 1 (Java) - 2023/2024
 
 Principal professor: dr. Aleksandar Tošić
+
 Lecturer: dr. Niki Hrovatin
+
 Practice assistant: dr. Jernej Vičič
 
 ## Intro 
@@ -20,12 +22,14 @@ In this repository you will find code for assignements, classes or anything else
     - `class` - Contains code from lectures, that was written during the class.
     - `homework`
       - `weekly` - Code from short weekly assignements.
-      - `projects` - Code from two bigger projects, we get through the year.
+      - `projects` - Code from two bigger projects, we received through the year.
     - `practice`
       - `lab` - Contains code we wrote during the lab practice.
       - `leetcode` - Solutions for leetcode problems.
+
 2. Organised code by dates (yyyy-mm-dd).
+
 3. Optionally organised further to maintain a clean structure.
 
 ## Contributions
-This is a personal space, thus contributions or pull requests will not be accepted (exceptions are Professors :')
+This is a personal space, thus contributions or pull requests will (probably) not be accepted.
