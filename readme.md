@@ -22,11 +22,11 @@ The repository serves as a personal archive of all code written during the cours
     - `class` - Contains code from lectures, that was written during the class.
     - `homework`
       - `weekly` - Code from short weekly assignements.
+      - `quiz` - Solutions for quizes. 
       - `projects` - Code from two bigger projects, we received through the year.
     - `practice`
       - `lab` - Contains code we wrote during the lab practice.
-      - `leetcode` - Solutions for leetcode problems.
-
+      
 2. Organised code by dates (yyyy-mm-dd).
 
 3. Optionally organised further to maintain a clean structure.
