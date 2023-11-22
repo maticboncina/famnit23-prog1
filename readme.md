@@ -14,7 +14,7 @@ Practice assistant: dr. Jernej Vičič
 
 The repository serves as a personal archive of all code written during the course of Programming 1 (Java) at UP FAMNIT. The code is written in Java, using IntelliJ IDEA as the IDE and covers fundemental topics of Java programming language. 
 
-**!!! Code may not be compliable, functional or fully completed. Use/Copy at your own risk, as the code is always submitted to a designated assigment before upload. Bugs may be included !!!**
+**!!!! Code may not be compliable, functional or fully completed. Use/Copy at your own risk, as the code is always submitted to a designated assigment before upload. Bugs may be included !!!!**
 
 ## Folder structure
 
