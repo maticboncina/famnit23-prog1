@@ -1,0 +1,43 @@
+# IntelliJ IDEA-specific files/directories
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Visual Studio Code environment
+.vscode/
+
+# Compiled class files
+*.class
+
+# Package files
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Maven specific
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# Gradle specific
+.gradle/
+build/
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# OS-specific files
+.DS_Store # macOS specific
+
+# Other common Java artifacts
+hs_err_pid*
