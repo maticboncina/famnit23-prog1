@@ -29,3 +29,11 @@ Dvojiško drevo je prazno ali pa je sestavljeno iz vozlišča, imenovanega __kor
 **Pot:** Vozlišča, ki so povezana z neprekinjenimi povezavami
 
 **Urejenost:** Urejenost sinov vozlišča je pomembna
+
+## Slike
+
+![Shema](shema.png)
+
+![Gozd](gozd.png)
+
+![Primer Drevesa](primer-drevesa.png)
