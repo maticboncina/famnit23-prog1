@@ -38,6 +38,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner bralnik = new Scanner(System.in);
         /* */
+
+
         System.out.println("Vnesi koliko številk boš vnesel za preverjanje:");
 
         String input = bralnik.nextLine();
