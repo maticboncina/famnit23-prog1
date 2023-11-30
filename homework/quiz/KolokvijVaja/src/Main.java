@@ -6,12 +6,17 @@ public class Main {
         Scanner bralnik = new Scanner(System.in);
 
         System.out.println("Vpiši prvi niz:");
-        String prviNiz = bralnik.nextLine();
+        int prviNiz = bralnik.nextInt();
 
         System.out.printf("Vpiši drugi niz:");
-        String drugiNiz = bralnik.nextLine();
+        int drugiNiz = bralnik.nextInt();
 
-        System.out.println(prviNiz+"-"+drugiNiz);
+        if (prviNiz % 5 == 0){
+            System.out.println(prviNiz+" je deljiv s 5");
+        }
+        if (drugiNiz % 5 == 0){
+            System.out.println(drugiNiz+" je deljiv s 5");
+        }
 
     }
 }

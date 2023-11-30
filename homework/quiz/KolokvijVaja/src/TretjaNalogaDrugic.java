@@ -34,6 +34,8 @@ public class TretjaNalogaDrugic {
         }
 
         System.out.println("");
+
+
         int razlikaElementovPolj[] = new int[stevilaIzPrvegaNiza.length];
         for (int i = 0; i < stevilaIzDrugegaNiza.length; i++) {
             razlikaElementovPolj[i] = Integer.parseInt(stevilaIzPrvegaNiza[i]) - Integer.parseInt(stevilaIzDrugegaNiza[i]);
