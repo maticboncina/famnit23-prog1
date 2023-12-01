@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
-    
+
     /**
      * The {@code numberChecker} method validates a given string to ensure it represents
      * a valid integer. This method checks if the input is not null or empty, if the input
