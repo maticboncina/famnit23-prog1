@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Main {
 
@@ -134,6 +135,167 @@ public class Main {
         return stevecRazlicnihStevil;
     }
 
+    /**
+     * Counts the number of even elements in a given array of integers. This method iterates through
+     * the array, checking each element to determine if it is even. The count of even elements is
+     * incremented each time an even number is encountered.
+     *
+     * <p>Note: This method does not print the count or modify the input array. It simply returns the count
+     * of even numbers found in the array.
+     *
+     * @param nizStevil An array of integers to be examined for even numbers. The array should not be null.
+     * @return          The count of even integers in the array. Returns 0 if the array contains no even numbers.
+     */
+
+    static int izpisiSteviloSodihStevil(int[] nizStevil){
+
+        int stevecSodihStevil = 0;
+        for (int i = 0; i < nizStevil.length; i++) {
+            if (nizStevil[i] % 2 == 0){
+                stevecSodihStevil++;
+            }
+        }
+        return stevecSodihStevil;
+    }
+
+    /**
+     * Counts the number of odd elements in a given array of integers. This method iterates through
+     * the array, checking each element to determine if it is odd. The count of odd elements is
+     * incremented each time an odd number is encountered.
+     *
+     * <p>Note: This method does not print the count or modify the input array. It simply returns the count
+     * of odd numbers found in the array.
+     *
+     * @param nizStevil An array of integers to be examined for odd numbers. The array should not be null.
+     * @return          The count of odd integers in the array. Returns 0 if the array contains no odd numbers.
+     */
+    static int izpisiSteviloLihihStevil(int[] nizStevil){
+
+        int stevecLihihStevil = 0;
+        for (int i = 0; i < nizStevil.length; i++) {
+            if (nizStevil[i] % 2 != 0){
+                stevecLihihStevil++;
+            }
+        }
+        return stevecLihihStevil;
+    }
+
+    /**
+     * Sorts a given array of integers using the bubble sort algorithm and returns the sorted array.
+     * This method first creates a copy of the input array, then applies the bubble sort algorithm
+     * to the copy. This ensures that the original array remains unmodified.
+     *
+     * <p>Note: The sorting is done in ascending order. The method does not modify the original array
+     * but returns a new sorted array.
+     *
+     * @param nizStevil The original array of integers to be sorted. This array is not modified.
+     * @return          A new array containing the elements of the original array, sorted in ascending order.
+     */
+    static int[] bubbleSortToNewArray(int[] nizStevil) {
+        // Copy the original array to a new array
+        int[] sortedNizStevil = Arrays.copyOf(nizStevil, nizStevil.length);
+
+        // Now, sort the new array
+        int n = sortedNizStevil.length;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (sortedNizStevil[j] > sortedNizStevil[j + 1]) {
+                    // Swap elements
+                    int temp = sortedNizStevil[j];
+                    sortedNizStevil[j] = sortedNizStevil[j + 1];
+                    sortedNizStevil[j + 1] = temp;
+                }
+            }
+        }
+
+        return sortedNizStevil;
+    }
+
+    /**
+     * Prints the percentage of occurrences of a specific number within a total count.
+     * This method calculates the percentage of times a given number appears (as indicated by the counter)
+     * out of a total number of instances (the total count) and prints this information formatted as a percentage.
+     *
+     * <p>Note: This method prints the result to the standard output using {@code System.out.printf}.
+     * The percentage is formatted to two decimal places.
+     *
+     * @param stevilo The specific number whose occurrences are being measured.
+     * @param stevec  The count of how many times {@code stevilo} occurs.
+     * @param skupek  The total count of instances or elements within which {@code stevilo} could occur.
+     */
+    static double izpisiPojavitve(int stevilo, int stevec, int skupek) {
+        double procent = 100.0 * stevec / skupek;
+        System.out.printf("Število %d se ponovi v %.2f%%\n", stevilo, procent);
+        return procent;
+    }
+
+    /**
+     * Calculates and prints the percentage occurrence of each unique number in a given array of integers.
+     * The method iterates through the sorted array, counting occurrences of each number and then using
+     * the {@code izpisiPojavitve} method to print out the percentage occurrence of each unique number.
+     *
+     * <p>Note: This method assumes that the input array is sorted. It prints the percentage occurrence of each
+     * unique number to the standard output. For the percentage calculation, it uses the length of the array as the total count.
+     *
+     * @param nizStevil A sorted array of integers. Each unique number's occurrence is calculated as a percentage
+     *                  of the total number of elements in the array.
+     */
+    static void izpisiProcentualnoPojavitevStevil(int[] nizStevil){
+        int trenutnoStevilo = nizStevil[0];
+        int stevec = 1;
+
+        for (int i = 1; i < nizStevil.length; i++) {
+            if (nizStevil[i] == trenutnoStevilo) {
+                stevec++;
+            } else {
+                izpisiPojavitve(trenutnoStevilo, stevec, nizStevil.length);
+                trenutnoStevilo = nizStevil[i];
+                stevec = 1;
+            }
+        }
+        // Še za zadnje stevilo
+        izpisiPojavitve(trenutnoStevilo, stevec, nizStevil.length);
+    }
+
+    /**
+     * Finds and prints the mode(s) of a given sorted array of integers. The mode is the number(s)
+     * that appear most frequently in the array. If there are multiple modes (numbers with the same
+     * highest frequency), the method prints all of them.
+     *
+     * <p>Note: This method assumes that the input array is sorted. It prints the mode(s) and their frequency
+     * to the standard output. If the array is empty, it prints a message indicating that the array is empty.
+     *
+     * @param sortedNizStevil A sorted array of integers. The method finds the number(s) that appear most frequently
+     *                        in this array. The array should not be null.
+     */
+
+    /* Tukaj sem bil velik bumbar, in se nisem spomnil, da lahko samo iz prej potegnem ven največkrat ponavjlajoče število in reversecalculatam kolikokrat se je pojavilo, ampak vseeno pustim notri, ker sem porabil absolutno preveč časa za to špageti kodo in izgubil veliko preveč možganskih celic :( */
+
+    static void najdiModus(int[] sortedNizStevil) {
+        int stevecPonovitveNajvecjegaStevila = 0;
+        int stevecTrenutnoNajvecjePonovitveStevila = 0;
+        String najveckratPonovljenaStevila = "";
+
+        for (int i = 0; i < sortedNizStevil.length; i++) {
+            stevecPonovitveNajvecjegaStevila++;
+
+            if (i == sortedNizStevil.length - 1 || sortedNizStevil[i] != sortedNizStevil[i + 1]) {
+                if (stevecPonovitveNajvecjegaStevila > stevecTrenutnoNajvecjePonovitveStevila) {
+                    stevecTrenutnoNajvecjePonovitveStevila = stevecPonovitveNajvecjegaStevila;
+                    najveckratPonovljenaStevila = Integer.toString(sortedNizStevil[i]);
+                } else if (stevecPonovitveNajvecjegaStevila == stevecTrenutnoNajvecjePonovitveStevila) {
+                    if (!najveckratPonovljenaStevila.isEmpty()) {
+                        najveckratPonovljenaStevila += ", ";
+                    }
+                    najveckratPonovljenaStevila += sortedNizStevil[i];
+                }
+                stevecPonovitveNajvecjegaStevila = 0;
+            }
+        }
+
+        System.out.println("Stevila " + najveckratPonovljenaStevila + " se pojavijo najveckrat. Pojavijo se " + stevecTrenutnoNajvecjePonovitveStevila + " krat.");
+    }
+
     public static void main(String[] args) {
         Scanner bralnik = new Scanner(System.in);
         System.out.println("Vnesi koliko številk boš vnesel za preverjanje:");
@@ -155,6 +317,13 @@ public class Main {
             nizStevil[i] = steviloZaVArray;
         }
 
+        // preverimo še edge case, če je uporabik rekel, da bo vnesel 0 števil
+        if (nizStevil.length == 0){
+            System.out.println("Nisi se odločil vnesti vnesel nobenega stevila in si me zaklal :( - Exiting");
+            System.out.println("************************************************************");
+            System.exit(1);
+        }
+
         System.out.println("************************************************************");
         System.out.println("Končal sem z vnosom števil. Hvala, da me nisi vmes zaklal :)");
 
@@ -164,28 +333,35 @@ public class Main {
         // izpiše array števil
         System.out.println("************************************************************");
         System.out.println("Izpisujem array vnešenih števil");
-        System.out.println();
         int[] izpisaniArray = izpisiNiz(nizStevil);
 
         System.out.println("************************************************************");
-        System.out.println("Izpisujem število različnih števil v podanem arrayu");
 
         int steviloUniqueStevil = izpisiSteviloUniqueStevil(nizStevil);
         System.out.println("Število različnih števil je: " + steviloUniqueStevil);
 
+        System.out.println("************************************************************");
+        int steviloSodihStevil = izpisiSteviloSodihStevil(nizStevil);
+        System.out.println("Število sodih števil je: "+steviloSodihStevil);
 
+        System.out.println("************************************************************");
+        int steviloLihihStevil = izpisiSteviloLihihStevil(nizStevil);
+        System.out.println("Število lihih števil je: "+steviloLihihStevil);
+
+        System.out.println("************************************************************");
+        int sortedNizStevil[] = bubbleSortToNewArray(nizStevil);
+        izpisiProcentualnoPojavitevStevil(nizStevil);
+
+        System.out.println("************************************************************");
+        najdiModus(sortedNizStevil);
+
+        System.out.println("************************************************************");
 
     }
 }
-
-
 /**
  * Kaj rabim narest tuki
- * 4. funckija, ki izpiše število različnih števil
- * 5. funkcija, ki izpiše število sodih števil
- * 6. funkcija, ki izpiše število lihih števil
- * 7. funkcija, ki izpiše frekvenco pojavitev vsakega števila (v procentih)
- * 8. funkcija, ki izpiše število, ki se največkrat ponovi
+ *
  * 9. funkcija, ki izpiše največje število
  * 10. funkcija, ki izpiše drugo najmanjšo vrednost števil
  * 11. funkcija, ki izpiše povprečje vseh števil
@@ -195,34 +371,4 @@ public class Main {
  * 15. funkcija, ki izpiše koliko je palindromnih števil
  * 16. funkcija, ki izpiše največje palindromno število, ki je manjše od največjega števila v polju in hkrati palindrom (število ni nujno element polja)
  * 17. Program naj na koncu še izpiše vsa števila, ki so v polju, ločena z vejicami, v obratnem vrstnem redu kot so bila vnešena.
- * <p>
- * Good to do:
- * Funkcijo, ki se sprehaja skozi array?
- * Funckije naj kličejo ena druga...
- * Kakšen funkcije za basic job, kot je sesštevek vseh števil v arrayu etc...
- * <p>
- * Good to do:
- * Funkcijo, ki se sprehaja skozi array?
- * Funckije naj kličejo ena druga...
- * Kakšen funkcije za basic job, kot je sesštevek vseh števil v arrayu etc...
- * <p>
- * Good to do:
- * Funkcijo, ki se sprehaja skozi array?
- * Funckije naj kličejo ena druga...
- * Kakšen funkcije za basic job, kot je sesštevek vseh števil v arrayu etc...
- * <p>
- * Good to do:
- * Funkcijo, ki se sprehaja skozi array?
- * Funckije naj kličejo ena druga...
- * Kakšen funkcije za basic job, kot je sesštevek vseh števil v arrayu etc...
- * <p>
- * Good to do:
- * Funkcijo, ki se sprehaja skozi array?
- * Funckije naj kličejo ena druga...
- * Kakšen funkcije za basic job, kot je sesštevek vseh števil v arrayu etc...
- * <p>
- * Good to do:
- * Funkcijo, ki se sprehaja skozi array?
- * Funckije naj kličejo ena druga...
- * Kakšen funkcije za basic job, kot je sesštevek vseh števil v arrayu etc...
  */
