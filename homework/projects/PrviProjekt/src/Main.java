@@ -1,10 +1,9 @@
 import java.util.Scanner;
-import java.util.Arrays;
 
 public class Main {
 
     /**
-     * The {@code numberChecker} method validates a given string to ensure it represents
+     * The {@code preverjevalnikStevila} method validates a given string to ensure it represents
      * a valid integer. This method checks if the input is not null or empty, if the input
      * is a numeric string (including negative numbers), and if the numeric value can fit
      * within the bounds of an integer type in Java. If any of these checks fail, the
@@ -13,34 +12,34 @@ public class Main {
      * Note: This method uses {@code System.exit(1)} to terminate the program if the input
      * is null, empty, not a numeric string, or represents a number too large for an integer.
      *
-     * @param input A {@code String} representing the input that needs to be validated
+     * @param vnos A {@code String} representing the input that needs to be validated
      *              as a numeric string that can be converted to an integer.
      * @return      An {@code int} value corresponding to the integer representation of the input string.
      *              This value is only returned if the input passes all validation checks.
      */
 
-    static int numberChecker(String input) {
-        // Zapazimo, da vnešeno ni null niti empty
-        if (input == null || input.equals("")) {
+    static int preverjevalnikStevila(String vnos) {
+        // Zapazimo, da vnešena ropotija ni ne null, niti empty
+        if (vnos == null || vnos.equals("")) {
             System.out.println("Vnešen podatek je null ali pa je prazen. Exiting.");
             System.exit(1);
         }
 
-        // Prevereimo, če je številka, sploh številka
-        if (!input.matches("-?[0-9]+")) {
+        // Preverimo, če je številka, sploh številka
+        if (!vnos.matches("-?[0-9]+")) {
             System.out.println("Vnešen podatek ni številka. Zaklal si me :( - Exiting.");
             System.exit(1);
         }
 
         // Preverimo, če je številka prevelika za int tip
         try {
-            return Integer.parseInt(input);
+            return Integer.parseInt(vnos);
         } catch (Exception e) {
             System.out.println("Prevelika stevilka. Exiting.");
             System.exit(1);
         }
 
-        int stevilka = parseratorIntegerjev(input);
+        int stevilka = parseratorIntegerjev(vnos);
         return stevilka;
     }
 
@@ -52,14 +51,14 @@ public class Main {
      * Note: This method does not include input validation. It expects that the input string
      * has already been validated as a numeric string that can be converted to an integer.
      * A {@code NumberFormatException} will be thrown if the string is not a valid integer.
-     * @param input A string representing the number to be converted into an integer.
+     * @param vnos A string representing the number to be converted into an integer.
      *              The string should be a valid integer representation.
      * @return      An integer value corresponding to the integer representation of the input string.
      * @throws      NumberFormatException If the input string is not a valid integer.
      */
 
-    static int parseratorIntegerjev(String input){
-        int stevilka = Integer.parseInt(input);
+    static int parseratorIntegerjev(String vnos){
+        int stevilka = Integer.parseInt(vnos);
         return stevilka;
     }
 
@@ -181,26 +180,32 @@ public class Main {
     }
 
     /**
-     * Sorts a given array of integers using the bubble sort algorithm and returns the sorted array.
-     * This method first creates a copy of the input array, then applies the bubble sort algorithm
-     * to the copy. This ensures that the original array remains unmodified.
+     * Sorts an array of integers in ascending order using the Bubble Sort algorithm
+     * and returns a new sorted array. The original array remains unaltered.
+     * <p>
+     * Bubble Sort is a simple sorting algorithm that repeatedly steps through the list,
+     * compares adjacent elements, and swaps them if they are in the wrong order. The pass
+     * through the list is repeated until no swaps are needed, which indicates that the
+     * list is sorted.
+     * <p>
+     * This method creates a new array to avoid modifying the original input array.
      *
-     * <p>Note: The sorting is done in ascending order. The method does not modify the original array
-     * but returns a new sorted array.
-     *
-     * @param nizStevil The original array of integers to be sorted. This array is not modified.
-     * @return          A new array containing the elements of the original array, sorted in ascending order.
+     * @param nizStevil An array of integers to be sorted.
+     * @return A new array containing the sorted elements in ascending order.
      */
-    static int[] bubbleSortToNewArray(int[] nizStevil) {
-        // Copy the original array to a new array
-        int[] sortedNizStevil = Arrays.copyOf(nizStevil, nizStevil.length);
+    static int[] mehurckovoSortiranjeVNoviArray(int[] nizStevil) {
+        // naredimo nov array, ker ne želimo zaklati našega piškotka nizStevil, ker bi to pomenilo, da bi ubistvu kasneje zaklali sami sebe pri eni drugi točki, zato ga dajemo v nov array
+        int[] sortedNizStevil = new int[nizStevil.length];
+        for (int i = 0; i < nizStevil.length; i++) {
+            sortedNizStevil[i] = nizStevil[i];
+        }
 
-        // Now, sort the new array
+        // zdej dejansko nucamo bubble sort, ki sortira novi array
         int n = sortedNizStevil.length;
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
                 if (sortedNizStevil[j] > sortedNizStevil[j + 1]) {
-                    // Swap elements
+                    // menjamo elemente
                     int temp = sortedNizStevil[j];
                     sortedNizStevil[j] = sortedNizStevil[j + 1];
                     sortedNizStevil[j + 1] = temp;
@@ -212,49 +217,30 @@ public class Main {
     }
 
     /**
-     * Prints the percentage of occurrences of a specific number within a total count.
-     * This method calculates the percentage of times a given number appears (as indicated by the counter)
-     * out of a total number of instances (the total count) and prints this information formatted as a percentage.
+     * This method calculates and prints the percentage occurrence of each number in a sorted array.
+     * It iterates through the sorted array of integers, counts the occurrence of each number,
+     * and prints out the number along with its percentage occurrence in the array.
      *
-     * <p>Note: This method prints the result to the standard output using {@code System.out.printf}.
-     * The percentage is formatted to two decimal places.
-     *
-     * @param stevilo The specific number whose occurrences are being measured.
-     * @param stevec  The count of how many times {@code stevilo} occurs.
-     * @param skupek  The total count of instances or elements within which {@code stevilo} could occur.
+     * @param sortedNizStevil A sorted array of integers. The array must be sorted for this method to work correctly.
      */
-    static double izpisiPojavitve(int stevilo, int stevec, int skupek) {
-        double procent = 100.0 * stevec / skupek;
-        System.out.printf("Število %d se ponovi v %.2f%%\n", stevilo, procent);
-        return procent;
-    }
 
-    /**
-     * Calculates and prints the percentage occurrence of each unique number in a given array of integers.
-     * The method iterates through the sorted array, counting occurrences of each number and then using
-     * the {@code izpisiPojavitve} method to print out the percentage occurrence of each unique number.
-     *
-     * <p>Note: This method assumes that the input array is sorted. It prints the percentage occurrence of each
-     * unique number to the standard output. For the percentage calculation, it uses the length of the array as the total count.
-     *
-     * @param nizStevil A sorted array of integers. Each unique number's occurrence is calculated as a percentage
-     *                  of the total number of elements in the array.
-     */
-    static void izpisiProcentualnoPojavitevStevil(int[] nizStevil){
-        int trenutnoStevilo = nizStevil[0];
+    static void izpisiProcentualnoPojavitevStevil(int[] sortedNizStevil){
+        int trenutnoStevilo = sortedNizStevil[0];
         int stevec = 1;
 
-        for (int i = 1; i < nizStevil.length; i++) {
-            if (nizStevil[i] == trenutnoStevilo) {
+        for (int i = 1; i < sortedNizStevil.length; i++) {
+            if (sortedNizStevil[i] == trenutnoStevilo) {
                 stevec++;
             } else {
-                izpisiPojavitve(trenutnoStevilo, stevec, nizStevil.length);
-                trenutnoStevilo = nizStevil[i];
+                double procent = (double) stevec / sortedNizStevil.length * 100;
+                System.out.printf("Število %d se ponovi v %.2f%%\n", trenutnoStevilo, procent);
+                trenutnoStevilo = sortedNizStevil[i];
                 stevec = 1;
             }
         }
-        // Še za zadnje stevilo
-        izpisiPojavitve(trenutnoStevilo, stevec, nizStevil.length);
+
+        double procent = (double) stevec / sortedNizStevil.length * 100;
+        System.out.printf("Število %d se ponovi v %.2f%%\n", trenutnoStevilo, procent);
     }
 
     /**
@@ -269,7 +255,9 @@ public class Main {
      *                        in this array. The array should not be null.
      */
 
-    /* Tukaj sem bil velik bumbar, in se nisem spomnil, da lahko samo iz prej potegnem ven največkrat ponavjlajoče število in reversecalculatam kolikokrat se je pojavilo, ampak vseeno pustim notri, ker sem porabil absolutno preveč časa za to špageti kodo in izgubil veliko preveč možganskih celic :( */
+    /* Tukaj sem bil velik bumbar, ker sem programiral to v ločenem oknu in se nisem spomnil, da lahko preprosto od prej potegnem ven največkrat ponavjlajoče število in reversecalculatam kolikokrat se je pojavilo (saj podatke že imam), ampak vseeno puščam notri, ker sem porabil absolutno preveč časa za to špageti kodo, tako da ostaja notri :(
+    *
+    * Se pa zavedam, da bi lahko nekako poklical že sprogramirane funckije*/
 
     static void najdiModus(int[] sortedNizStevil) {
         int stevecPonovitveNajvecjegaStevila = 0;
@@ -279,6 +267,7 @@ public class Main {
         for (int i = 0; i < sortedNizStevil.length; i++) {
             stevecPonovitveNajvecjegaStevila++;
 
+            // špageti ala java
             if (i == sortedNizStevil.length - 1 || sortedNizStevil[i] != sortedNizStevil[i + 1]) {
                 if (stevecPonovitveNajvecjegaStevila > stevecTrenutnoNajvecjePonovitveStevila) {
                     stevecTrenutnoNajvecjePonovitveStevila = stevecPonovitveNajvecjegaStevila;
@@ -296,13 +285,182 @@ public class Main {
         System.out.println("Stevila " + najveckratPonovljenaStevila + " se pojavijo najveckrat. Pojavijo se " + stevecTrenutnoNajvecjePonovitveStevila + " krat.");
     }
 
+    /**
+     * Finds and prints the largest number in a given array of integers. This method iterates through
+     * the array, comparing each element with the current maximum value and updating it if a larger number is found.
+     *
+     * <p>Note: The initial comparison value is set to {@code Integer.MIN_VALUE} to ensure correct handling of
+     * negative numbers and zero. The method prints the largest number to the standard output.
+     *
+     * @param nizStevil An array of integers from which the largest number is to be found. The array should not be null.
+     *                  If the array is empty, the output will indicate the minimum value of an integer, as per the initial setting.
+     */
+
+    static void najvecjeStevilo(int[] nizStevil) {
+        int najvecjeStevilo = 0;
+        for (int i = 0; i < nizStevil.length; i++) {
+            if (nizStevil[i] > najvecjeStevilo) {
+                najvecjeStevilo = nizStevil[i];
+            }
+        }
+        System.out.println("Največje število je: " + najvecjeStevilo);
+    }
+
+    /**
+     * Finds and prints the second smallest number in an array of integers.
+     * If the array does not contain at least two distinct numbers, a message is printed indicating that
+     * the second smallest number does not exist. The method handles edge cases such as empty arrays or
+     * arrays with all elements being the same.
+     * <p>
+     * This method does not return any value. It prints the result directly to the console.
+     *
+     * @param nizStevil An array of integers to search through. It is expected to have at least two distinct elements
+     *                  to find the second smallest number.
+     */
+    static void drugoNajmanjseStevilo(int[] nizStevil) {
+        if (nizStevil.length < 2) {
+            System.out.println("Array ne vsebuje vsaj dveh (različnih) števil. Torej **drugo** najmanjše ne obstaja.");
+            return;
+        }
+
+        int najmanjseStevilo = Integer.MAX_VALUE;
+        int drugoNajmanjseStevilo = Integer.MAX_VALUE;
+
+        for (int i = 0; i < nizStevil.length; i++) {
+            if (nizStevil[i] < najmanjseStevilo) {
+                drugoNajmanjseStevilo = najmanjseStevilo;
+                najmanjseStevilo = nizStevil[i];
+            } else if (nizStevil[i] < drugoNajmanjseStevilo && nizStevil[i] != najmanjseStevilo) {
+                drugoNajmanjseStevilo = nizStevil[i];
+            }
+        }
+
+        if (drugoNajmanjseStevilo == Integer.MAX_VALUE) {
+            System.out.println("V tem arrayu ni drugega najmanjšega števila. Verjetno. ker si vnesel vse enake, premalo etc...");
+        } else {
+            System.out.println("Drugo najmanjše število je: " + drugoNajmanjseStevilo);
+        }
+    }
+
+    /**
+     * Calculates and returns the sum of all elements in an array of integers.
+     * This method iterates through each element of the provided array, accumulating their sum.
+     * If the array is empty, the method will return 0.
+     *
+     * @param nizStevil An array of integers whose sum needs to be calculated.
+     * @return The sum of all elements in the array. Returns 0 if the array is empty or null.
+     */
+    static float sestevator(int[] nizStevil){
+        float sestevekVsehStevilVArrayu = 0;
+        for (int i = 0; i < nizStevil.length; i++) {
+            sestevekVsehStevilVArrayu = sestevekVsehStevilVArrayu + nizStevil[i];
+        }
+        return sestevekVsehStevilVArrayu;
+    }
+
+    /**
+     * Calculates and returns the standard deviation of an array of integers.
+     * The method first computes the average of the numbers. Then it calculates the sum of the squared
+     * differences from the average. Finally, it returns the square root of the average of these squared differences, which is the standard deviation.
+     *
+     * @param nizStevil An array of integers whose standard deviation is to be calculated.
+     * @return The standard deviation of the elements in the array. Returns NaN if the array is empty.
+     */
+    static double izracunajStandardnoDeviacijo(int[] nizStevil) {
+        double povprecje = sestevator(nizStevil) / nizStevil.length;
+
+        double kvadratnaRazlikaVsot = 0.0;
+        for (int i = 0; i < nizStevil.length; i++) {
+            kvadratnaRazlikaVsot += Math.pow(nizStevil[i] - povprecje, 2);
+        }
+
+        double standardnaDeviacija = Math.sqrt(kvadratnaRazlikaVsot / nizStevil.length);
+        return standardnaDeviacija;
+    }
+
+    /**
+     * Calculates and returns the median of an array of integers. The array is assumed to be sorted in
+     * ascending order before this method is called. The median is the middle element of the array if the
+     * array's length is odd, or the average of the two middle elements if the array's length is even.
+     * <p>
+     * If the array is empty, the behavior of this method is undefined and may vary depending on the
+     * implementation or version of Java being used.
+     *
+     * @param urejenNizStevil A sorted array of integers. It should be sorted in ascending order prior
+     *                        to calling this method.
+     * @return The median value of the elements in the array. The return value for empty arrays is undefined.
+     */
+    static double izracunajMediano(int[] urejenNizStevil) {
+        int sredicaCokoladneTorte = urejenNizStevil.length / 2;
+        if (urejenNizStevil.length % 2 == 0) {
+            // Če je sodo število elementov delaj tko
+            return (urejenNizStevil[sredicaCokoladneTorte - 1] + urejenNizStevil[sredicaCokoladneTorte]) / 2.0;
+        } else {
+            // Drgal pa samo vrži ven sredico in ne računaj povprečja dveh, ker je itak samo en na sredini
+            return urejenNizStevil[sredicaCokoladneTorte];
+        }
+    }
+
+    /**
+     * Determines if a given integer is a palindrome. A number is considered a palindrome if it reads
+     * the same backward as forward. The method converts the integer to a string and then checks if
+     * the string is a palindrome.
+     * <p>
+     * For example, 121 and 12321 are palindromes, but 123 and 12345 are not.
+     *
+     * @param nizStevil The integer to check for palindromic properties.
+     * @return {@code true} if the integer is a palindrome; {@code false} otherwise.
+     */
+    public static boolean aliJeTipoPalindrom(int nizStevil) {
+        String noviNizStevilKerJeNizStevilZeTaken = Integer.toString(nizStevil);
+        for (int i = 0; i < noviNizStevilKerJeNizStevilZeTaken.length() / 2; i++) {
+            if (noviNizStevilKerJeNizStevilZeTaken.charAt(i) != noviNizStevilKerJeNizStevilZeTaken.charAt(noviNizStevilKerJeNizStevilZeTaken.length() - 1 - i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Iterates through an array of integers and prints all palindromic numbers found within it.
+     * A number is considered a palindrome if it reads the same backward as forward.
+     * The method utilizes 'aliJeTipoPalindrom' to check each number. If one or more palindromes are found,
+     * it prints each of them. If no palindromes are found, it prints a message indicating this.
+     * <p>
+     * This method does not return any value; it prints the results directly to the console.
+     *
+     * @param nizStevil An array of integers to be checked for palindromic numbers.
+     */
+    public static int izpisiPalindrome(int[] nizStevil) {
+        int stevec = 0;
+        boolean eureka = false;
+
+        for (int i = 0; i < nizStevil.length; i++) {
+            int stevilo = nizStevil[i];
+            if (aliJeTipoPalindrom(stevilo)) {
+                if (!eureka) {
+                    System.out.println("Našel sem palindrome:");
+                    eureka = true;
+                }
+                System.out.println(stevilo);
+                stevec++;
+            }
+        }
+
+        if (stevec == 0) {
+            System.out.println("Nisem našel palindromov.");
+        }
+
+        return stevec;
+    }
+
     public static void main(String[] args) {
         Scanner bralnik = new Scanner(System.in);
         System.out.println("Vnesi koliko številk boš vnesel za preverjanje:");
 
         // Dobimo podatek koliko števil bo uporabnik vnesel in preverimo, če je dejansko vnesel število
         String nepreverjenoSteviloStevil = bralnik.nextLine();
-        int preverjenoSteviloStevil = numberChecker(nepreverjenoSteviloStevil);
+        int preverjenoSteviloStevil = preverjevalnikStevila(nepreverjenoSteviloStevil);
 
         // zdaj imam preverjeno stevilo v preverjenoSteviloStevil
         // Vprašamo uporabnika za array števil, in tudi preverimo če so števila
@@ -313,7 +471,7 @@ public class Main {
 
         for (int i = preverjenoSteviloStevil - 1; i >= 0; i--) {
             System.out.println("Vnesi še " + (i + 1) + " števil.");
-            int steviloZaVArray = numberChecker(bralnik.nextLine());
+            int steviloZaVArray = preverjevalnikStevila(bralnik.nextLine());
             nizStevil[i] = steviloZaVArray;
         }
 
@@ -327,16 +485,13 @@ public class Main {
         System.out.println("************************************************************");
         System.out.println("Končal sem z vnosom števil. Hvala, da me nisi vmes zaklal :)");
 
-        // to je moj piškotek DO NOT TOUCH!!!! NIZ ŠTEVIL JE GOOD BOY z njim lahko zdaj operiram kolokor hočem
+        // to je moj piškotek DO NOT TOUCH!!!!
         nizStevil = obrniNiz(nizStevil);
 
-        // izpiše array števil
         System.out.println("************************************************************");
-        System.out.println("Izpisujem array vnešenih števil");
-        int[] izpisaniArray = izpisiNiz(nizStevil);
+        System.out.println("Število elementov v podanem arrayu je "+nizStevil.length);
 
         System.out.println("************************************************************");
-
         int steviloUniqueStevil = izpisiSteviloUniqueStevil(nizStevil);
         System.out.println("Število različnih števil je: " + steviloUniqueStevil);
 
@@ -349,26 +504,37 @@ public class Main {
         System.out.println("Število lihih števil je: "+steviloLihihStevil);
 
         System.out.println("************************************************************");
-        int sortedNizStevil[] = bubbleSortToNewArray(nizStevil);
-        izpisiProcentualnoPojavitevStevil(nizStevil);
+        // kle ga obrnem in mam mojega piškotka za zmerej tudi obrnjenega :)
+        int sortedNizStevil[] = mehurckovoSortiranjeVNoviArray(nizStevil);
+        izpisiProcentualnoPojavitevStevil(sortedNizStevil);
 
         System.out.println("************************************************************");
         najdiModus(sortedNizStevil);
 
         System.out.println("************************************************************");
+        najvecjeStevilo(nizStevil);
 
+        System.out.println("************************************************************");
+        drugoNajmanjseStevilo(nizStevil);
+
+        System.out.println("************************************************************");
+        System.out.println("Povprečje vse števil v arrayu je: "+(sestevator(nizStevil) / nizStevil.length));
+
+        System.out.println("************************************************************");
+        System.out.println("Standardna deviacija je: "+izracunajStandardnoDeviacijo(nizStevil));
+
+        System.out.println("************************************************************");
+        System.out.println("Mediana podanih stevil v arrayu je: "+izracunajMediano(sortedNizStevil));
+
+        System.out.println("************************************************************");
+        System.out.println("Sestevek vseh stevil v arrayu je: "+sestevator(nizStevil));
+
+        System.out.println("************************************************************");
+        System.out.println("Skupaj je to "+izpisiPalindrome(nizStevil)+" palindromov.");
+
+        System.out.println("************************************************************");
+        System.out.println("Izpisujem obrnjen array vnešenih števil:");
+        izpisiNiz(obrniNiz(nizStevil));
     }
+
 }
-/**
- * Kaj rabim narest tuki
- *
- * 9. funkcija, ki izpiše največje število
- * 10. funkcija, ki izpiše drugo najmanjšo vrednost števil
- * 11. funkcija, ki izpiše povprečje vseh števil
- * 12. funkcija, ki izpiše standardno deviacijo
- * 13. funkcija, ki izpiše mediano
- * 14. funkcija, ki izpiše vsoto vseh števil
- * 15. funkcija, ki izpiše koliko je palindromnih števil
- * 16. funkcija, ki izpiše največje palindromno število, ki je manjše od največjega števila v polju in hkrati palindrom (število ni nujno element polja)
- * 17. Program naj na koncu še izpiše vsa števila, ki so v polju, ločena z vejicami, v obratnem vrstnem redu kot so bila vnešena.
- */
