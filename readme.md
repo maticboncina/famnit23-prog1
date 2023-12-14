@@ -33,5 +33,8 @@ The repository serves as a personal archive of all code written during the cours
 
 ## Contributions
 
-Drawings by [MIha Prajs](https://github.com/mihaprajs)
+Drawings by [MIha Prajs](https://github.com/mihaprajs).
+
+---
+
 This is a personal space, thus contributions or pull requests will (probably) not be accepted.
