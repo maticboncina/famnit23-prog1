@@ -16,7 +16,12 @@ try {
 }
 ```
 
+Throws exceptions se zgodijo v metodi, ki jo kličemo. Metoda, ki jo kličemo, mora imeti throws deklaracijo, da vrne izjemo.
+
+Runtime expection catcha vse runtime izjeme.
+
+
 ## Slike
 
 Slika 1: Shema izjem
-![Shema](shema.png)
+![Shema Izjem](exception-scheme.png)
