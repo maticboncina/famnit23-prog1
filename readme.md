@@ -33,7 +33,7 @@ The repository serves as a personal archive of all code written during the cours
 
 ## Contributions
 
-Drawings by [MIha Prajs](https://github.com/mihaprajs).
+Drawings by [Miha Prajs](https://github.com/mihaprajs).
 
 ---
 
