@@ -27,9 +27,9 @@ E = {(1,2), (1,3), (3,1), (5,2), (4,5), (4,2), (4,4)} -> Množica povezav
 
 ## Posebni tipi grafov
 ### Povezan seznam
-![Seznam](seznam.png)
+![povezan](povezan.png)
 ### Drevo
-![Drevo](drevo.png)
+![Drevo](tree.png)
 
 ## Sosednjost
 - Dva vozlišča sta soseda, če sta povezana
