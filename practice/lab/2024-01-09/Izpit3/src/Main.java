@@ -2,34 +2,35 @@ class Tree {
     Tree levo, srednje, desno;
     int glava;
 
-    public Tree(int head) {
-        this.glava = head;
+    // Constructor for the Tree class
+    public Tree(int glava) {
         this.levo = null;
         this.srednje = null;
         this.desno = null;
+        this.glava = glava;
     }
 
-    public boolean vstavi(int elt) {
-        if (this.glava > elt) {
-            if (this.levo == null) {
-                this.levo = new Tree(elt);
+    boolean vstavi(int elt) {
+        if (elt < glava) {
+            if (levo == null) {
+                levo = new Tree(elt);
                 return true;
             } else {
-                return this.levo.vstavi(elt);
+                return levo.vstavi(elt);
             }
-        } else if (elt < this.glava * this.glava) {
-            if (this.srednje == null) {
-                this.srednje = new Tree(elt);
+        } else if (elt >= glava && elt < (glava * glava)) {
+            if (srednje == null) {
+                srednje = new Tree(elt);
                 return true;
             } else {
-                return this.srednje.vstavi(elt);
+                return srednje.vstavi(elt);
             }
         } else {
-            if (this.desno == null) {
-                this.desno = new Tree(elt);
+            if (desno == null) {
+                desno = new Tree(elt);
                 return true;
             } else {
-                return this.desno.vstavi(elt);
+                return desno.vstavi(elt);
             }
         }
     }
