@@ -30,9 +30,6 @@ public class Utilities {
         return Integer.toString(randomNumber);
     }
 
-
-
-
     // smart to rewrite these two function into one, which takes max and min as input, thinking... oh well
     // ne pozabi implementirat nazaj v board, če si jih tam vem yeetnu
     // ne pozabi spremenit ime ropotije in spremenit kodo za vzame številki za inpout + update pogodbe

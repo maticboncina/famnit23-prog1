@@ -26,5 +26,10 @@ public class Main {
     public static void main(String[] args) {
         System.out.println(sestejDoN(3));
         System.out.println(zmnozek(5, 6));
+
+
+        Integer.parseInt();
+        Integer.toString();
+        
     }
 }
